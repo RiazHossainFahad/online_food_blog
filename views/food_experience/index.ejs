@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-6" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Food Experience</title>
+
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+
+    <style>
+        h2,
+        h4,
+        h5 {
+            text-align: center;
+        }
+        
+        #first0 {
+            margin-top: 1%;
+        }
+        
+        a {
+            float: right;
+            margin: 2%
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+    </div>
+
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <table class="table">
+            <% if(fx_info.length != 0){%>
+                <%for(var i=0;i< fx_info.length; i++){%>
+                    <tr>
+                        <td>
+                            <div id="first<%=i%>" class='panel panel-info'>
+                                <div>
+                                    <h4><strong>
+                     <%= fx_info[i].u_name%>
+                 </strong></h4>
+                                    <h5>Review for<strong>
+                          <%= fx_info[i].f_about%></strong> in
+                                        <strong>
+                              <%= fx_info[i].r_location%>
+                      </strong>
+                                    </h5>
+                                    <p class='text-primary' style='margin-left:5px;font-size:20px;'>
+                                        <%= fx_info[i].f_exp%>
+                                    </p>
+                                </div>
+                                <%if(u_type == 'Admin'){%>
+                                    <a class="btn btn-danger" href="/food-experience/delete/<%= fx_info[i].f_id%>">DELETE</a>
+                            </div>
+                            <%}}}else{%>
+                                <h2>Nothing to show</h2>
+                                <%}%>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <% if(u_type != null) {%>
+
+                                <a data-toggle="modal" class="btn btn-default" href="#modal-add-experience">Add Experience</a>
+
+                                <!-- Modal For add experience. -->
+                                <div class="modal fade" id="modal-add-experience">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <center>
+                                                    <h4 class="modal-title">Add Food Experience</h4>
+                                                </center>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="col-2"></div>
+                                                <form action="/food-experience" method="POST" class="form" role="form">
+
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="">Experience About</label>
+                                                        <input type="text" class="form-control" name="f_about" placeholder="What you write about?" required>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="sr-only" for="">Location</label>
+                                                        <input type="text" class="form-control" name="r_loc" placeholder="Location of the restaurant" required>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <textarea name="f_exp" class="form-control" rows="3" placeholder="Enter your experience in detail." required></textarea>
+
+                                                    </div>
+
+                                                    <center><button type="submit" class="btn btn-primary">Review</button></center>
+                                                </form>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <% if(u_type == 'Admin'){%>
+                                    <a class="btn btn-info" style="width:20%;float: right;" href="/home-admin">Previous page</a>
+                                    <%}else{%>
+                                        <a class="btn btn-info" style="width:20%;float: right;" href="/home-member">Previous page</a>
+                                        <%}}else{%>
+                                            <a class="btn btn-info" style="width:20%;float: right;" href="/">Previous page</a>
+                                            <%}%>
+                        </td>
+                    </tr>
+        </table>
+
+    </div>
+
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 ">
+    </div>
+
+</body>
+
+</html>

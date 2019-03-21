@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+				<title>Home</title>
+				
+				<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+				<script src="/jquery/jquery.min.js"></script>
+				<script src="/bootstrap/js/bootstrap.min.js"></script>
+
+    <style>
+      .navbar{
+        margin : 10px;
+        padding: 10px;
+       }
+
+			</style>
+			
+			<script>
+			$('document').ready(function(){
+				$('#notification').click(function(){
+					$.ajax({
+									type: 'GET',
+         url: 'http://localhost:3000/home/pharmacy-notification',						
+         success: function(data) {
+										console.log('success');
+         	console.log(data[0].p_id);
+        }
+    });
+				});
+			});
+			</script>
+
+</head>
+
+<body>
+<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" aria-expanded="false">
+			<span class="sr-only">Navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/home">Online Prescription Point</a>
+		</div>
+
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav">
+
+	        <li><a href='/home'><%=user_info.user_name %></a></li>
+								<% if(user_info.user_type =="Doctor"){%>
+									<li><a href="/home/prescription">Prescription</a></li>
+								
+									<li>
+										<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+											Notification	<%if(notification.length){%> 
+												<sup><span class='badge badge-secondary'><%= notification.length%></span></sup>
+												<%}%>
+										</a>
+										<ul class="dropdown-menu">
+												<% for(var i=0; i < notification.length; i++){ %>
+											<li>
+												<a style="color:blue" href="/home/doctor-notification/<%=notification[i].p_id%>">
+													Request for change medicine of <strong><%=notification[i].p_name%></strong>
+												</a>
+											</li>
+											<%}%>
+											</ul>
+									</li>
+									
+									
+									<%}if(user_info.user_type =="Pharmacy"){%>
+         <li>
+									<a class="dropdown-toggle" data-toggle="dropdown" href="#">Notification	<%if(notification.length){%> <sup><span class='badge badge-secondary'><%= notification.length%></span></sup><%}%></a>
+									<ul class="dropdown-menu">
+											<% for(var i=0; i < notification.length; i++){ %>
+										<li><a style="color:blue" href="/home/pharmacy-notification/<%=notification[i].p_id%>">Prescription of <strong><%=notification[i].p_name%></strong> from <strong><%=notification[i].p_location%></strong></a></li>
+										<%}%>
+										</ul>
+								</li>
+								<%}%>
+								
+								
+								<li>
+									<a href='/home/edit_profile'>Edit Account</a>
+								</li>
+   </ul>
+   
+   <ul class="nav navbar-nav navbar-right">
+     <li><a href='/logout'><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+ </ul>
+		</div>
+	</div>
+</nav>
+<div class="container">
+	<div class="row">
+		
+		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			
+		</div>
+		
+		<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+			
+			<table class="table table-bordered table-hover">
+
+					<tr style="text-align: center">
+							<td colspan="6" class="active">
+									<h3>Welcome <%=user_info.user_name%>
+							</td>
+						</tr>
+
+				<tbody>
+						<tr>
+								<td class="labelFont h5">Your hospital name: </td>
+								<td>
+									<h5><%=add_info.user_hospital%></h5>
+								</td>
+							</tr>
+			
+							<% if(user_info.user_type == "Doctor"){%>		<!-- as only doctor have the degree option -->
+							<tr>
+								<td class="labelFont h5">Your Degree: </td>
+								<td>
+									<h5><%=add_info.user_degree%></h5>
+								</td>
+							</tr>
+							<%}%>
+							
+							<tr>
+									<td class="labelFont h5">Your Email: </td>
+									<td>
+										<h5><%=user_info.user_email%></h5>
+									</td>
+								</tr>
+
+								<tr>
+										<td class="labelFont h5">You are a: </td>
+										<td>
+											<h5><%=user_info.user_type%></h5>
+										</td>
+									</tr>
+
+									<tr>
+											<td class="labelFont h5">Your Relationship status: </td>
+											<td>
+												<h5><%=user_info.user_relationship_status%></h5>
+											</td>
+										</tr>
+
+										<tr>
+												<td class="labelFont h5">Your Address: </td>
+												<td>
+													<h5><%=user_info.user_location%></h5>
+												</td>
+											</tr>
+										
+											
+										<tr>
+												<td class="labelFont h5">Your gender: </td>
+												<td>
+													<h5><%=user_info.user_gender%></h5>
+												</td>
+											</tr>
+
+											
+										<tr>
+												<td class="labelFont h5">Your Date of birth: </td>
+												<td>
+													<h5><%=user_info.user_dob%></h5>
+												</td>
+											</tr>
+										<tr>
+												<td class="labelFont h5">Your License no: </td>
+												<td>
+													<h5><%=add_info.user_license_no%></h5>
+												</td>
+											</tr>
+
+
+									</tbody>
+			</table>
+			
+		</div>
+		
+		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+			
+		</div>
+		
+	</div>
+</div>
+</body>
+</html>

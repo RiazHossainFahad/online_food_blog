@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-6" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Home-Member</title>
+
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+
+
+    <script>
+        $('document').ready(function() {
+            $('#search').click(function() {
+                var keyword = $("#searchField").val();
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://localhost:4000/home-member/search/' + keyword,
+                    success: function(r_list) {
+                        if (r_list.length != 0) {
+                            for (var i = 0; i < r_list.length; i++) {
+                                $("#ancor" + i).html(r_list[i].r_name + ' in ' + r_list[i].r_location);
+                                $('#ancor' + i).attr('href', '/home-member/view/' + r_list[i].r_id);
+
+                                // $(".inner").append("<a href=/home-member/view/" + r_list[i].r_id + ">" + r_list[i].r_name + " in " + r_list[i].r_location + "</a>");
+                            }
+                        } else {
+                            alert("Nothing found");
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+    <style>
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+    </div>
+
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <h2>You can search restaurants here.</h2>
+        <form>
+            <div class="input-group">
+                <input type="text" id="searchField" class="form-control" size="50%" placeholder="Enter address/location name" required>
+                <div class="input-group-btn">
+                    <button type="button" id="search" class="btn btn-danger">Search</button>
+                </div>
+            </div>
+        </form>
+
+        <table class="table">
+            <%if(r_list != ""){ for(var i =0;i< r_list.length;i++){%>
+                <tr>
+                    <td class="inner">
+                        <a id="ancor<%=i%>" href="/home-member/view/<%= r_list[i].r_id%>">
+                            <%= r_list[i].r_name%> in
+                                <%= r_list[i].r_location%>
+                        </a>
+                    </td>
+                </tr>
+                <% } } else{%>
+                    <tr>
+                        <td>
+                            <h2>Nothing found</h2>
+                        </td>
+                    </tr>
+                    <%}%>
+                        <tr>
+                            <td>
+                                <a class="btn btn-info" style="width:20%;float: right;" href="/home-member">Previous page</a>
+                            </td>
+                        </tr>
+        </table>
+    </div>
+
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+    </div>
+
+</body>
+
+</html>

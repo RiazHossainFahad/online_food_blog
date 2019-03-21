@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <title>Online Food Blog</title>
+
+    <style>
+        .navbar {
+            margin: 10px;
+            padding: 10px;
+        }
+        
+        .btn {
+            width: 20%
+        }
+        
+        #error {
+            text-align: center;
+            color: red;
+        }
+        
+        form {
+            margin: 1%;
+        }
+    </style>
+    <script>
+        alert(errors);
+    </script>
+</head>
+
+<body>
+    <%if(errors != null){ for(var i=0; i< errors.length; i++){%>
+        <p id="error">
+            <%=errors[i].msg%>
+        </p>
+        <%}}%>
+
+            <!--Navigation Bar-->
+            <div class="col-lg-12">
+                <nav class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                   <span class="icon-bar"></span>
+                   <span class="icon-bar"></span>
+                   <span class="icon-bar"></span>
+               </button>
+                            <a class="navbar-brand" href="/">Online Food Blog</a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="myNavbar">
+                            <ul class="nav navbar-nav">
+                                <li><a data-toggle="modal" href="#modal-aboutProject">About Project</a></li>
+                                <li>
+                                    <a href='/food-experience'>Food Experience</a>
+                                </li>
+
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href='/signup'><span class="glyphicon glyphicon-user"></span> SignUp</a></li>
+                                <li><a href="/login"><span class="glyphicon glyphicon-arrow-left"></span> Login</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <!--Modal For about project.-->
+            <div class="modal fade" id="modal-aboutProject">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <center>
+                                <h4 class="modal-title">About Project</h4>
+                            </center>
+                        </div>
+                        <div class="modal-body">
+                            <h3>Introduction</h3>
+                            <p>
+                                There will be identity of many restaurants along with their wide range of food items. The viewers will get to know many restaurants, get familiar with many dishes and would be able to post reviews about those items belong to some restaurants
+                            </p>
+
+                            <h3>Functionality of the system</h3>
+                            <p><pre>
+1. The system will have three types of users- ADMIN, MEMBER, VISITOR
+2. There must be a registration page for the users ADMIN and MEMBER. 
+3. Only valid ADMIN and MEMBER can log into the blog.
+4. There must be a profile page for both ADMIN and MEMBER where they will be
+able to update their personal information. 
+5. ADMIN will be the main control point of the system means ADMIN can 
+remove any MEMBER and their profiles. 
+6. Only the ADMIN panel will hold the authorization permit to update the 
+blog information‟s. 
+7. ADMIN will add the restaurants information and the menus they provide. 
+8. There must be separate pages for every restaurant.
+9. There will be many items available under one restaurant and
+clicking on each item will navigate towards a sperate details page. 
+10. The ADMIN can add new, delete or update existing restaurants information. 
+11. The restaurants information must include location and a short background
+along with goals. 
+12. The MEMBER will be able to browse through the blog. They can view the 
+restaurants information‟s along with food item. 
+13. There will be a generalized home page from where the MEMBERs will start
+browse and search option must be provided. 
+14. The search option must have some filtering properties. The MEMBERs should
+be able to search restaurant on the basis of location, area etc properties. 
+15. The MEMBERs will be able to post review about restaurants and food items.
+Under every food item page there will be a section where the MEMBERs will be
+able to comment short reviews on that item. ADMIN will hold the capabilities
+to remove comments from here. 
+16. There will be a separate page named as “Food Experience”. On this page,
+both the MEMBERs and ADMINs will be able to post a descriptive review about
+a restaurant or about a food item or both. Under there must be 
+a comments section where other valid users can comment. 
+17. Once navigated to this “Food Experience” page, the valid users will be
+able to see all the published post. 
+18. The ADMIN will hold the option of removing posts and
+comments from “Food Experience” page.
+19. The VISITOR type of users will only be able to see the simplified home 
+page, the restaurants information‟s and food items and the food experience
+blog. But they cannot post review or any type of comment. In a word the 
+VISITORs are most general viewer and will get the basic view permission.
+                            </pre>
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- Image carousel-->
+                        <div class="container">
+                            <center>
+                                <h2 style="color:rgb(48, 121, 72)">Welcome to Online Food Blog</h2>
+                            </center>
+                            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                <!-- Indicators -->
+                                <ol class="carousel-indicators">
+                                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                                </ol>
+
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner">
+
+                                    <div class="item active">
+                                        <img src="images/img1.jpg" alt="Physician" style="width:100%;height: 480px;">
+                                        <div class="carousel-caption">
+                                        </div>
+                                    </div>
+
+                                    <div class="item">
+                                        <img src="images/img2.jpg" alt="Pharmacy" style="width:100%;height: 480px;">
+                                        <div class="carousel-caption">
+                                        </div>
+                                    </div>
+
+                                    <div class="item">
+                                        <img src="images/img3.jpg" alt="Doctor" style="width:100%;height: 480px;">
+                                        <div class="carousel-caption">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- Left and right controls -->
+                                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+</body>
+
+</html>

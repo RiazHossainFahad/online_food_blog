@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-6" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>View Item</title>
+
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+
+    <style>
+        h2,
+        h4,
+        h5 {
+            text-align: center;
+        }
+        
+        #error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+    </div>
+
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+
+        <table class="table">
+            <tr>
+                <td>
+                    <h2>
+                        <%= r_info.r_name%>
+                    </h2>
+                    <h4>
+                        <%= r_info.r_location%>
+                    </h4>
+                    <h5>
+                        <%= r_info.r_details%>
+                    </h5>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <h4>Item Details</h4>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <li>
+                        <h3>
+                            <%= i_info.i_name%>
+                        </h3>
+                        <p>
+                            <%= i_info.i_detail%>
+                        </p>
+                    </li>
+                </td>
+            </tr>
+
+            <%if(c_info.length != 0){ for(var i=0;i< c_info.length;i++){%>
+                <tr>
+                    <td>
+                        <div class='panel panel-info'>
+                            <div>
+                                <h4><i> Commented by </i><strong>
+                    <% for(var j=0;j< u_info.length;j++){%> 
+                        <% if(u_info[j].user_id == c_info[i].u_id){%>
+                                    <%= u_info[j].user_name%>
+                                    <%}}%>
+                                </strong></h4>
+                                <p class='text-primary' style='margin-left:5px;font-size:20px;'>
+                                    <%= c_info[i].comment%>
+                                </p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <%} }%>
+                    <tr>
+                        <td>
+                            <form method="POST">
+                                <div class="form-group">
+                                    <textarea name="comment" class="form-control" id="comment" rows="3" placeholder="Enter your comment here" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <center><button class="btn btn-success">Comment</button></center>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <a class="btn btn-info" style="width:20%;float: right;" href="/home-member/view/<%= i_info.r_id%>">Previous page</a>
+                        </td>
+                    </tr>
+        </table>
+    </div>
+
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <%if(errors != null){ for(var i=0; i< errors.length; i++){%>
+            <p id="error">
+                <%=errors[i].msg%>
+            </p>
+            <%}}%>
+    </div>
+
+</body>
+
+</html>

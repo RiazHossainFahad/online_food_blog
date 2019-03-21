@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Restaurants & Menus</title>
+
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            alert("You have to add 5 items for opening a restaurant");
+            var next = 1;
+            $(".add-more").click(function(e) {
+                e.preventDefault();
+                var addto = "#field" + next;
+                var addDetail = "#detail" + next;
+                var addRemove = "#field" + (next);
+                next = next + 1;
+                $("#count").val(next);
+                var newIn = '<input autocomplete="off" class="input form-control" id="field' + next + '" name="item' + next + '"required placeholder="Item name" type="text">';
+
+                var newDe = '<textarea class="form-control" type="text" id="detail' + next + '" name="about' + next + '" rows="2" placeholder="About item" required></textarea>';
+                var newInput = $(newIn);
+                var newDe = $(newDe);
+                var removeBtn = '<button id="remove' + (next - 1) + '" class="btn btn-danger remove-me" >Delete item</button></div><div id="field"></br>';
+                var removeButton = $(removeBtn);
+                $(addto).after(newInput);
+                $(addto).after(newDe);
+
+                $(addRemove).after(removeButton);
+                $("#field" + next).attr('data-source', $(addto).attr('data-source'));
+
+                $('.remove-me').click(function(e) {
+                    e.preventDefault();
+                    var fieldNum = this.id.charAt(this.id.length - 1);
+                    var fieldID = "#field" + fieldNum;
+                    var fieldD = "#detail" + fieldNum;
+                    $(this).remove();
+                    $(fieldID).remove();
+                    $(fieldD).remove();
+                });
+            });
+
+
+        });
+    </script>
+
+    <style>
+        .btn-danger {
+            margin-left: 2%;
+        }
+        
+        p {
+            color: red;
+        }
+    </style>
+
+    <style>
+        .labelFont {
+            font-weight: bold;
+        }
+        
+        form {
+            margin: 2%;
+        }
+        
+        a {
+            margin-left: 2%;
+            color: firebrick;
+        }
+        
+        .b1 {
+            float: right;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-8">
+                <form method="POST">
+                    <table class="table table-bordered table-hover">
+                        <tr style="text-align: center">
+                            <td colspan="6" class="active">
+                                <h2>Add Restaurants & Menus</h2>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="labelFont">Restaurant Name</td>
+                            <td>
+                                <input class="form-control" type="text" data-toggle="tooltip" data-placement="right" title="Enter Restaurants Name" name="r_name" required>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="labelFont">Restaurant Location</td>
+                            <td>
+                                <select class="form-control" name="r_location">
+        <option value="Banani" >Banani</option>
+        <option value="Gulsan-1" >Gulsan-1</option>
+        <option value="Gulsan-2" >Gulsan-2</option>
+        <option value="Mohakhali" >Mohakhali</option>
+        <option value="Kuril" >Kuril</option>
+        <option value="Khilkhet" >Khilkhet</option>
+        <option value="Nikunjo-2" >Nikunjo-2</option>
+        <option value="Airport" >Airport</option>
+       </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="labelFont">About Restaurant</td>
+                            <td>
+                                <textarea class="form-control" type="text" name="r_about" rows="3" placeholder="About the restaurants" required></textarea>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="labelFont">Menus</td>
+                            <td>
+                                <input type="hidden" id="count" name="count" value="1" />
+                                <textarea class="form-control" type="text" id="detail1" name="about1" rows="2" placeholder="About item" required></textarea>
+
+                                <input autocomplete="off" class="input form-control" id="field1" name="item1" type="text" required placeholder="Item name" />
+                                <button id="b1" class="btn btn-info add-more" type="button">More items</button>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td colspan="6">
+                                <center> <input type="submit" class="btn btn-success" name="signup" style="width: 40%;" value="Add Restaurant">
+                                    <a href="/home-admin">Back</a>
+                                </center>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="col-sm-2">
+                <%if(errors != null){ for(var i=0; i< errors.length; i++){%>
+                    <p>
+                        <%=errors[i].msg%>
+                    </p>
+                    <%}}%>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
